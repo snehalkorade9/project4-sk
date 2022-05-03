@@ -35,6 +35,7 @@ def create_app():
         app.config.from_object("app.config.DevelopmentConfig")
     elif os.environ.get("FLASK_ENV") == "testing":
         print("in testing env")
+        app.config["SECRET_KEY"] = "12345678"
         app.config.from_object("app.config.TestingConfig")
 
 
