@@ -47,3 +47,4 @@ rfc3339
 Bootstrap-Flask==2.0.2
 utils~=1.0.1
 setuptools~=60.10.0
+flask-cors
