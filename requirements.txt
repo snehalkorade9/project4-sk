@@ -44,4 +44,6 @@ wrapt==1.14.0
 WTForms==3.0.1
 zipp==3.8.0
 rfc3339
-flask_bootstrap==1.1.0
+Bootstrap-Flask==2.0.2
+utils~=1.0.1
+setuptools~=60.10.0
