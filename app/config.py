@@ -20,6 +20,8 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     SESSION_COOKIE_SECURE = False
+    WTF_CSRF_METHOD = []
+    WTF_CSRF_ENABLED = False
 
 
 class TestingConfig(Config):
