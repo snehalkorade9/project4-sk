@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, current_app
+import logging
+
+from flask import Blueprint, render_template, redirect, url_for, flash,current_app
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash
 
@@ -12,13 +14,17 @@ auth = Blueprint('auth', __name__, template_folder='templates')
 
 @auth.route('/register', methods=['POST', 'GET'])
 def register():
+    log = logging.getLogger("myApp")
     if current_user.is_authenticated:
+        print("Current user",current_user)
         return redirect(url_for('auth.dashboard'))
     form = register_form()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        print("user", user)
         if user is None:
             user = User(email=form.email.data, password=generate_password_hash(form.password.data))
+            print("user check pass", user)
             db.session.add(user)
             db.session.commit()
             if user.id == 1:
@@ -26,6 +32,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
             flash('Congratulations, you are now a registered user!', "success")
+            log.info(user)
             return redirect(url_for('auth.login'), 302)
         else:
             flash('Already Registered')
@@ -47,7 +54,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            flash("Welcome", 'success')
+            flash("Welcome1", 'success')
             return redirect(url_for('auth.dashboard'))
     return render_template('login.html', form=form)
 
@@ -67,8 +74,10 @@ def logout():
 @auth.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
-
+    if current_user.is_authenticated:
+        return render_template('dashboard.html')
+    else:
+        return redirect(url_for('auth.dashboard'), 403)
 
 @auth.route('/profile', methods=['POST', 'GET'])
 def edit_profile():
@@ -169,6 +178,7 @@ def delete_user(user_id):
     db.session.commit()
     flash('User Deleted', 'success')
     return redirect(url_for('auth.browse_users'), 302)
+
 
 
 
