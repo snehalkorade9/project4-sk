@@ -5,6 +5,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
+    WTF_CSRF_METHODS= ['POST', 'PUT', 'PATCH']
     SESSION_COOKIE_SECURE = True
     BOOTSTRAP_BOOTSWATCH_THEME = 'Simplex'
     DB_DIR = os.getenv('DB_DIR','database')
