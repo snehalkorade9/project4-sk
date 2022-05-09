@@ -12,7 +12,7 @@ class Transaction(db.Model,SerializerMixin):
     __tablename__ = 'transactions'
     amount = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(300), nullable=True, unique=False)
-    #artist = db.Column(db.String(300), nullable=True, unique=False)
+    artist = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = relationship("User", back_populates="transaction", uselist=False)
 
