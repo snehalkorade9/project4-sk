@@ -9,12 +9,14 @@ from flask_bootstrap import Bootstrap5
 
 from flask_wtf.csrf import CSRFProtect
 
+from app import error_handlers
 from app.auth import auth
 from app.auth import auth
 from app.cli import create_database
 from app.context_processors import utility_text_processors
 from app.db import db
 from app.db.models import User
+from app.logging_config import log_con
 
 from app.simple_pages import simple_pages
 
@@ -52,7 +54,7 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(database)
     # these load functionality without a web interface
-    #app.register_blueprint(log_con)
+    app.register_blueprint(log_con)
     #app.register_blueprint(error_handlers)
     app.register_blueprint(transaction)
     #app.register_blueprint(map)

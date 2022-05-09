@@ -38,13 +38,16 @@ def transaction_upload():
 
             filename = secure_filename(form.file.data.filename)
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            print("filepath", filepath)
             form.file.data.save(filepath)
             #user = current_user
             list_of_transaction = []
-            with open(filepath) as file:
+            with open(filepath, newline='') as file:
                 csv_file = csv.DictReader(file)
                 for row in csv_file:
-                    list_of_transaction.append(Transaction(row['AMOUNT'], row['Type']))
+                    print(row)
+                    print("Row of TID", row['TID'])
+                    list_of_transaction.append(Transaction(row['TID'], row['AMOUNT'], row['TYPE']))
 
             current_user.transaction = list_of_transaction
             db.session.commit()
