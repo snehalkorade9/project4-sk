@@ -27,7 +27,6 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SESSION_COOKIE_SECURE = False
-    DEBUG = True
     WTF_CSRF_METHOD = []
     WTF_CSRF_ENABLED = False
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
