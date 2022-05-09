@@ -30,5 +30,6 @@ class TestingConfig(Config):
     DEBUG = True
     WTF_CSRF_METHOD = []
     WTF_CSRF_ENABLED = False
+    SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
 
 
