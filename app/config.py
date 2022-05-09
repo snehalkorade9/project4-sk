@@ -1,9 +1,11 @@
 import os
 
+
 class Config(object):
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     DEBUG = False
     TESTING = False
+    WTF_CSRF_ENABLED = True
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
     SESSION_COOKIE_SECURE = True
     BOOTSTRAP_BOOTSWATCH_THEME = 'Simplex'
@@ -20,8 +22,6 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     SESSION_COOKIE_SECURE = False
-    WTF_CSRF_METHOD = []
-    WTF_CSRF_ENABLED = False
 
 
 class TestingConfig(Config):
@@ -29,5 +29,6 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SESSION_COOKIE_SECURE = False
     DEBUG = True
-    WTF_CSRF_METHOD = []
     WTF_CSRF_ENABLED = False
+    #csrf().disable()
+
