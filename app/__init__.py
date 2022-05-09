@@ -29,16 +29,13 @@ login_manager = flask_login.LoginManager()
 def create_app():
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
-    print("create app")
     if  os.environ.get("FLASK_ENV") == "production":
         print("in prod")
         app.config.from_object("app.config.ProductionConfig")
     elif os.environ.get("FLASK_ENV") == "development":
-        print("in Dev env")
         app.config.from_object("app.config.DevelopmentConfig")
     elif os.environ.get("FLASK_ENV") == "testing":
-        print("in testing env")
-        #app.config.setdefault('WTF_CSRF_METHODS', ['POST', 'PUT', 'PATCH'])
+        app.config['WTF_CSRF_METHODS'] = []
         app.config.from_object("app.config.TestingConfig")
 
 
