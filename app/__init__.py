@@ -31,6 +31,7 @@ login_manager = flask_login.LoginManager()
 def create_app():
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'any secret string'
     if  os.environ.get("FLASK_ENV") == "production":
         print("in prod")
         app.config.from_object("app.config.ProductionConfig")
