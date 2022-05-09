@@ -26,10 +26,11 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     SESSION_COOKIE_SECURE = False
     DEBUG = True
     WTF_CSRF_METHOD = []
-    WTF_CSRF_ENABLED = False
+
     #csrf().disable()
 
