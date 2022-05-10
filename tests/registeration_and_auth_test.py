@@ -27,3 +27,18 @@ def test_user_login(client, application, create_user):
         ), follow_redirects=True)
         assert rv.request.path == "/dashboard"
         assert b"Welcome1" in rv.data
+
+
+@auth.route('/login', methods=['POST', 'GET'])
+def test_invalid_user_login(client, application, create_user):
+    with application.app_context():
+        rv = client.post('/login', data=dict(
+            email='sk123@njit.edu',
+            password='testtest'
+        ), follow_redirects=True)
+        assert b"Invalid username or password" in rv.data
+        rv = client.post('/login', data=dict(
+            email='s1234@njit.com',
+            password='Test123#'
+        ), follow_redirects=True)
+        assert b"Invalid username or password" in rv.data
