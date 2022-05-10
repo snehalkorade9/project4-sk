@@ -19,9 +19,18 @@ transaction = Blueprint('transaction', __name__,
 def transaction_browse(page):
     page = page
     per_page = 1000
+    sum = 0
     pagination = Transaction.query.paginate(page, per_page, error_out=False)
+    print("Browse")
     data = pagination.items
+    for transaction in data:
+        print("display amount", transaction.amount)
+        sum = sum + transaction.amount
+    print("Sum", sum)
+
     try:
+        #sum = db.select(db.func.sum(Transaction.amount))
+        #db.session.execute()
         return render_template('browse_transaction.html',data=data,pagination=pagination)
     except TemplateNotFound:
         abort(404)
@@ -29,8 +38,7 @@ def transaction_browse(page):
 @transaction.route('/transaction/upload', methods=['POST', 'GET'])
 @login_required
 def transaction_upload():
-    print("Current user", current_user, "is admin", current_user.is_admin)
-    print("in transaction upload")
+    amount = 0
     if current_user.is_admin:
         form = csv_upload()
         if form.validate_on_submit():
@@ -45,10 +53,7 @@ def transaction_upload():
             with open(filepath, newline='') as file:
                 csv_file = csv.DictReader(file)
                 for row in csv_file:
-                    print(row)
-                    print("Row of TID", row['TID'])
-                    list_of_transaction.append(Transaction(row['TID'], row['AMOUNT'], row['TYPE']))
-
+                    list_of_transaction.append(Transaction(row['AMOUNT'], row['TYPE']))
             current_user.transaction = list_of_transaction
             db.session.commit()
 

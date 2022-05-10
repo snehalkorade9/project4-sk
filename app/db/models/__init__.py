@@ -10,15 +10,15 @@ from flask_login import UserMixin
 
 class Transaction(db.Model,SerializerMixin):
     __tablename__ = 'transactions'
-    tid = db.Column(db.Integer, primary_key=True)
+
+    id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Integer, nullable=False, unique=False)
     type = db.Column(db.String(300), nullable=False, unique=False)
     #artist = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = relationship("User", back_populates="transaction", uselist=False)
 
-    def __init__(self, tid, amount, type):
-        self.tid = tid
+    def __init__(self, amount, type):
         self.amount = amount
         self.type = type
 
