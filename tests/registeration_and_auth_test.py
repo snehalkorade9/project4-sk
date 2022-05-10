@@ -42,3 +42,7 @@ def test_invalid_user_login(client, application, create_user):
             password='Test123#'
         ), follow_redirects=True)
         assert b"Invalid username or password" in rv.data
+
+
+
+

@@ -47,3 +47,10 @@ def create_user(application):
             db.session.add(user)
             db.session.commit()
 
+@pytest.fixture()
+def logged_in_user(client, application, create_user):
+    with application.app_context():
+        rv = client.post('/login', data=dict(
+            email='sk@njit.edu',
+            password='Test123#'     #testing password
+        ), follow_redirects=True)
