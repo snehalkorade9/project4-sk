@@ -75,7 +75,7 @@ def logout():
 @login_required
 def dashboard():
     data = Transaction.query.filter_by(user_id=current_user.id)
-    print("data", data, "datatype")
+    #print("data", data, "datatype")
     if current_user.is_authenticated:
         return render_template('dashboard.html')
         #return render_template('dashboard.html', data=data)

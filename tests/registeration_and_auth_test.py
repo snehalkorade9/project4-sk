@@ -15,3 +15,15 @@ def test_register_user(client, application):
         assert rv.status_code == 200
         assert rv.request.path == "/login"
         assert b"Congratulations" in rv.data
+
+
+@auth.route('/login', methods=['POST', 'GET'])
+def test_user_login(client, application, create_user):
+    with application.app_context():
+        rv = client.post('/login', data=dict(
+            email='sk@njit.edu',
+            password='Test123#',
+            #testing password
+        ), follow_redirects=True)
+        assert rv.request.path == "/dashboard"
+        assert b"Welcome1" in rv.data
