@@ -48,7 +48,7 @@ def test_invalid_user_login(client, application, create_user):
 @auth.route('/dashboard')
 def test_dashboard_access_denyed_for_unauthorized_user(client, application):
     with application.app_context():
-        #user = User.query.get(User.id)
+        #user = User.query.get(User.id)test
         response = client.get("/dashboard")
         assert response.status_code == 302
 
