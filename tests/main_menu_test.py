@@ -12,7 +12,6 @@ def test_main_menu_without_login(client):
     assert b'href="/register"' in response.data
 
 
-
 @auth.route('/dashboard')
 def test_links_post_login(client, application, logged_in_user):
     with application.app_context():
