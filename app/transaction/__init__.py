@@ -7,7 +7,7 @@ from flask_login import current_user, login_required
 from jinja2 import TemplateNotFound
 
 from app.db import db
-from app.db.models import Transaction
+from app.db.models import Transaction, User
 from app.transaction.forms import csv_upload
 from werkzeug.utils import secure_filename, redirect
 
@@ -25,14 +25,17 @@ def transaction_browse(page):
     log.info("Display transactions")
     data = pagination.items
     for transaction in data:
-        print("display amount", transaction.amount)
+        #print("display amount", transaction.amount)
         sum = sum + transaction.amount
     log.info(sum)
+    current_user.sum = sum
+    db.session.commit()
+    print("user sum", current_user.sum)
 
     try:
         #sum = db.select(db.func.sum(Transaction.amount))
-        #db.session.execute()
-        return render_template('browse_transaction.html',data=data,pagination=pagination)
+        #db.session.commit()
+        return render_template('browse_transaction.html', data=data, pagination=pagination)
     except TemplateNotFound:
         log.info("Display transaction Page not found")
         abort(404)

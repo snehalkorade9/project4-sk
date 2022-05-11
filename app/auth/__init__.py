@@ -88,6 +88,7 @@ def dashboard():
     if current_user.is_authenticated:
         return render_template('dashboard.html')
         #return render_template('dashboard.html', data=data)
+
     else:
         log.info("unauthorized user")
         return redirect(url_for('auth.dashboard'), 403)
