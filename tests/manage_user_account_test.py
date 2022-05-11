@@ -25,3 +25,6 @@ def test_new_user_creation(client, application, logged_in_user):
         ), follow_redirects=True)
         print("rv.request.path", rv.request.path)
         assert rv.status_code == 200
+        assert b'Congratulations, you just created a u' in rv.data
+
+
