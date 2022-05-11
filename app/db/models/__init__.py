@@ -14,8 +14,10 @@ class Transaction(db.Model,SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Integer, nullable=False, unique=False)
     type = db.Column(db.String(300), nullable=False, unique=False)
+    balance = db.Column(db.Integer, nullable=False, server_default='0')
     #artist = db.Column(db.String(300), nullable=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    #balance = db.Column(db.Integer, nullable=False, server_default='0')
     user = relationship("User", back_populates="transaction", uselist=False)
 
     def __init__(self, amount, type):

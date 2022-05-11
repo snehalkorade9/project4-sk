@@ -83,15 +83,22 @@ def logout():
 @login_required
 def dashboard():
     log = logging.getLogger("myApp")
-    data = Transaction.query.filter_by(user_id=current_user.id)
-    #print("data", data, "datatype")
-    if current_user.is_authenticated:
-        return render_template('dashboard.html')
-        #return render_template('dashboard.html', data=data)
+    trans_avilable = Transaction.query.first()
+    print("temp", trans_avilable)
+    if trans_avilable != None:
+        data = Transaction.query.filter_by(user_id=current_user.id)
+        print("in trans and current user", current_user.id)
+        if current_user.is_authenticated:
+            print("check user auth", data)
+            return render_template('dashboard.html')
+            #return render_template('browse_transaction.html', data=data)
+        else:
+            log.info("unauthorized user")
+            return redirect(url_for('auth.dashboard'), 403)
 
     else:
-        log.info("unauthorized user")
-        return redirect(url_for('auth.dashboard'), 403)
+        print("no data")
+        return render_template('dashboard.html')
 
 @auth.route('/profile', methods=['POST', 'GET'])
 def edit_profile():
@@ -164,12 +171,9 @@ def edit_user(user_id):
     form = user_edit_form(obj=user)
     if form.validate_on_submit():
         user.about = form.about.data
-        log.info(user.about)
         user.is_admin = int(form.is_admin.data)
-        log.info(user.is_admin)
         db.session.add(user)
         db.session.commit()
-        user.is_admin("User Edited Successfully")
         flash('User Edited Successfully', 'success')
         current_app.logger.info("edited a user")
         return redirect(url_for('auth.browse_users'))
@@ -179,23 +183,23 @@ def edit_user(user_id):
 @auth.route('/users/new', methods=['POST', 'GET'])
 @login_required
 def add_user():
-    form = create_user_form()
     log = logging.getLogger("myApp")
+    form = create_user_form()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        log.info(user)
         if user is None:
-            user = User(email=form.email.data, password=generate_password_hash(form.password.data))#, is_admin = int(form.is_admin.data))
+            user = User(email=form.email.data, password=generate_password_hash(form.password.data))
             db.session.add(user)
-            log.user('created a user')
             db.session.commit()
             flash('Congratulations, you just created a user', 'success')
             return redirect(url_for('auth.browse_users'))
         else:
             flash('Already Registered')
-            log.info('user Already Registered')
             return redirect(url_for('auth.browse_users'))
     return render_template('user_new.html', form=form)
+
+
+    return render_template('register.html', form=form)
 
 @auth.route('/users/<int:user_id>/delete', methods=['POST'])
 @login_required
