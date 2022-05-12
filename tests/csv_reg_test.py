@@ -1,11 +1,6 @@
 from app import auth
 
 
-@auth.route('/transaction', methods=['POST', 'GET'])
-def test_register_user_valid_test(client, application, ):
-    response = client.get("/transaction")
-    assert response.status_code == 200
-
 
 @auth.route('/register', methods=['POST', 'GET'])
 def test_register_user_valid_same(client, application):

@@ -13,7 +13,7 @@ def test_main_menu_without_login(client):
 
 
 @auth.route('/dashboard')
-def test_links_post_login_invalid(client, application, logged_in_user):
+def test_links_post_login_valid(client, application, logged_in_user):
     with application.app_context():
         #user = User.query.get(User.id)
         response = client.get("/dashboard")
