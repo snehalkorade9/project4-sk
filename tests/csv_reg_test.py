@@ -1,8 +1,14 @@
 from app import auth
 
 
+@auth.route('/transaction', methods=['POST', 'GET'])
+def test_register_user_valid_test(client, application, ):
+    response = client.get("/transaction")
+    assert response.status_code == 200
+
+
 @auth.route('/register', methods=['POST', 'GET'])
-def test_register_user_valid(client, application):
+def test_register_user_valid_same(client, application):
     response = client.get("/register")
     assert response.status_code == 200
     with application.app_context():
@@ -19,7 +25,7 @@ def test_register_user_valid(client, application):
 
 
 @auth.route('/login', methods=['POST', 'GET'])
-def test_user_login_valid(client, application, create_user):
+def test_user_login_test(client, application, create_user):
     with application.app_context():
         rv = client.post('/login', data=dict(
             email='sk@njit.edu',
@@ -31,7 +37,7 @@ def test_user_login_valid(client, application, create_user):
 
 
 @auth.route('/login', methods=['POST', 'GET'])
-def test_invalid_login_user(client, application, create_user):
+def test_invalid_login_test(client, application, create_user):
     with application.app_context():
         rv = client.post('/login', data=dict(
             email='sk123@njit.edu',
@@ -46,7 +52,7 @@ def test_invalid_login_user(client, application, create_user):
 
 
 @auth.route('/dashboard')
-def test_dashboard_access_denyed_for_unauth_user(client, application):
+def test_dashboard_access_denyed(client, application):
     with application.app_context():
         #user = User.query.get(User.id)test
         response = client.get("/dashboard")

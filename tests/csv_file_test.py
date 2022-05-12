@@ -1,9 +1,11 @@
 import os
+from typing import io
 
 from flask import current_app
 from werkzeug.utils import secure_filename
 
-from app import transaction
+from app import transaction, auth
+
 
 @transaction.route('/transactions/upload')
 def test_allow_upload_file(client, application, logged_in_user):
@@ -26,4 +28,6 @@ def test_log_folder_creation():
     root = os.path.dirname(os.path.abspath(__file__))
     print (os.path.join(root, "/Project4/app/uploads"))
     assert os.path.exists(os.path.join(root, "../app/uploads")) == True
+
+
 
