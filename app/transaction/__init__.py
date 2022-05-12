@@ -55,8 +55,10 @@ def transaction_upload():
         if form.validate_on_submit():
             log = logging.getLogger("myApp")
             filename = secure_filename(form.file.data.filename)
+            print(filename)
             log.info("Upload file from")
             filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            print(filepath)
             log.info(filepath)
             form.file.data.save(filepath)
             #user = current_user.
