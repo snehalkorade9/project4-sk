@@ -18,18 +18,6 @@ def test_register_user(client, application):
 
 
 @auth.route('/login', methods=['POST', 'GET'])
-def test_user_login(client, application, create_user):
-    with application.app_context():
-        rv = client.post('/login', data=dict(
-            email='sk@njit.edu',
-            password='Test123#',
-            #testing password
-        ), follow_redirects=True)
-        assert rv.request.path == "/dashboard"
-        assert b"Welcome1" in rv.data
-
-
-@auth.route('/login', methods=['POST', 'GET'])
 def test_invalid_user_login(client, application, create_user):
     with application.app_context():
         rv = client.post('/login', data=dict(
@@ -45,7 +33,7 @@ def test_invalid_user_login(client, application, create_user):
 
 
 
-@auth.route('/dashboard')
+@auth.route('/transaction')
 def test_dashboard_access_denyed_for_unauthorized_user(client, application):
     with application.app_context():
         #user = User.query.get(User.id)test

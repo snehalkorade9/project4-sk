@@ -42,11 +42,26 @@ def test_new_user_exist(client, application, logged_in_user):
 
 
 @auth.route('/users', methods=['POST'])
-def test_delete_existing_user(client, application, logged_in_user):
+def test_delete_self_user(client, application, logged_in_user):
     response = client.get("users/1/delete")
     with application.app_context():
         rv = client.post('users/1/delete', data=dict(
             email='sk@njit.edu' ), follow_redirects=True)
         assert rv.status_code == 200
         assert b'delete yourself!' in rv.data
+
+@auth.route('/users', methods=['POST'])
+def test_delete_existing_user(client, application, logged_in_user):
+    response = client.get("users/1/delete")
+    with application.app_context():
+        rv = client.post('users/1/delete', data=dict(
+            email='sk1@njit.edu' ), follow_redirects=True)
+        assert rv.status_code == 200
+        assert b'delete yourself!' in rv.data
+
+
+@auth.route('/users', methods=['POST'])
+def test_denye_access_delete_existing_user(client, application, logged_in_non_admin_user):
+    response = client.get("users/1/delete")
+    assert response.status_code == 405
 

@@ -13,20 +13,10 @@ def test_main_menu_without_login(client):
 
 
 @auth.route('/dashboard')
-def test_links_post_login_valid(client, application, logged_in_user):
-    with application.app_context():
-        #user = User.query.get(User.id)
-        response = client.get("/dashboard")
-        assert response.status_code == 200
-        response = client.get("/profile")
-        assert response.status_code == 200
-        response = client.get("/account")
-        assert response.status_code == 200
-        response = client.get("/users")
-        assert response.status_code == 200
-        response = client.get("/transaction")
-        assert response.status_code == 200
-        response = client.get("/about")
-        assert response.status_code == 200
-        response = client.get("/welcome")
-        assert response.status_code == 200
+def test_access_non_admin(client, application, logged_in_non_admin_user):
+    response = client.get("/")
+    assert response.status_code == 200
+    response = client.get("/account")
+    assert response.status_code == 200
+    response = client.get("/user")
+    assert response.status_code == 404
