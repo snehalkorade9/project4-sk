@@ -1,7 +1,6 @@
 astroid==2.11.2
 attrs==21.4.0
 bcrypt==3.2.0
-Bootstrap-Flask==2.0.2
 cffi==1.15.0
 click==8.1.2
 coverage==6.3.2
@@ -44,4 +43,10 @@ Werkzeug==2.1.1
 wrapt==1.14.0
 WTForms==3.0.1
 zipp==3.8.0
+rfc3339
+Bootstrap-Flask==2.0.2
+utils~=1.0.1
+setuptools~=60.10.0
+flask-cors
+sqlalchemy-serializer
 rfc3339
