@@ -1,0 +1,23 @@
+2022-05-13 05:06:48,419 [INFO] myApp: Home Page loaded successfully
+2022-05-13 05:07:09,840 [INFO] myApp: None
+2022-05-13 05:07:11,318 [INFO] myApp: Registered successfully
+2022-05-13 05:07:20,054 [INFO] myApp: <User 'sk3285@njit.edu'>
+2022-05-13 05:07:21,087 [INFO] myApp: User logged in
+2022-05-13 05:07:35,181 [INFO] myApp: user profile updated with about
+2022-05-13 05:07:35,194 [INFO] myApp: test tegdsjhcasd
+2022-05-13 05:07:47,849 [INFO] myApp: Updated your Password or Email
+2022-05-13 05:07:51,582 [INFO] myApp: Browse User
+2022-05-13 05:08:05,181 [INFO] myApp: Browse User
+2022-05-13 05:08:12,594 [INFO] myApp: Browse User
+2022-05-13 05:08:20,390 [INFO] myApp: Browse User
+2022-05-13 05:08:25,061 [INFO] myApp: Display transactions
+2022-05-13 05:08:25,073 [INFO] myApp: Sum of user's
+2022-05-13 05:08:25,074 [INFO] myApp: transactions
+2022-05-13 05:08:25,075 [INFO] myApp: 0
+2022-05-13 05:08:38,724 [INFO] myApp: Upload file from
+2022-05-13 05:08:38,725 [INFO] myApp: /home/myuser/app/uploads/transactions_2.csv
+2022-05-13 05:08:38,756 [INFO] myApp: file uploaded successfully
+2022-05-13 05:08:39,054 [INFO] myApp: Display transactions
+2022-05-13 05:08:46,510 [INFO] myApp: Sum of user's
+2022-05-13 05:08:46,512 [INFO] myApp: transactions
+2022-05-13 05:08:46,513 [INFO] myApp: 10601
